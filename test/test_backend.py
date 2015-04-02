@@ -27,7 +27,7 @@ class ApiTest(LiveServerTestCase):
     def test_Api(self):
 
     	print "This is a test to check that the api endpoints are working properly."
-        assert self.app.config['MONGODB_SETTINGS'] == {'db': 'ddsm-integrate', 'host': 'localhost', 'port': 27017}
+        # assert self.app.config['MONGODB_SETTINGS'] == {'db': 'ddsm-integrate', 'host': 'localhost', 'port': 27017}
         browser = twill.get_browser()
         browser.go("http://localhost:%d/api/v1/project0/"%self.app.config['LIVESERVER_PORT'])
         self.assertTrue(browser.get_code() in (401, 404))

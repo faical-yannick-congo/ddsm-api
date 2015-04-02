@@ -19,6 +19,12 @@ before_script:
 notifications:
   email: "yannick.congo@gmail.com"
 
+before_script:
+  - rm -rf ddsm-db
+  - git clone https://github.com/faical-yannick-congo/ddsm-db.git
+  - cd ddsm-db
+  - python setup.py develop
+  - cd ..
 # command to run tests
 script: 
   - nosetests -w $TRAVIS_BUILD_DIR/test --with-doctest -v
