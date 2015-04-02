@@ -10,12 +10,12 @@ class ApiTest(LiveServerTestCase):
             import api
             api.app.config['LIVESERVER_PORT'] = 5110
             api.app.config['TESTING'] = True
-            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': 'localhost','port': 27017}
+            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': '127.0.0.1','port': 27017}
         except:
             import api
             api.app.config['LIVESERVER_PORT'] = 5100
             api.app.config['TESTING'] = True
-            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': 'localhost','port': 27017}
+            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': '127.0.0.1','port': 27017}
 
         return api.app
 
@@ -27,7 +27,7 @@ class ApiTest(LiveServerTestCase):
     def test_Api(self):
 
     	print "This is a test to check that the api endpoints are working properly."
-        # assert self.app.config['MONGODB_SETTINGS'] == {'db': 'ddsm-integrate', 'host': 'localhost', 'port': 27017}
+        # assert self.app.config['MONGODB_SETTINGS'] == {'db': 'ddsm-integrate', 'host': '127.0.0.1', 'port': 27017}
         browser = twill.get_browser()
         browser.go("http://localhost:%d/api/v1/project0/"%self.app.config['LIVESERVER_PORT'])
         self.assertTrue(browser.get_code() in (401, 404))

@@ -6,16 +6,16 @@ class LogicTest(LiveServerTestCase):
     def create_app(self):
         try:
             browser = twill.get_browser()
-            browser.go("http://localhost:5100/")
+            browser.go("http://127.0.0.1:5100/")
             import api
             api.app.config['LIVESERVER_PORT'] = 5110
             api.app.config['TESTING'] = True
-            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': 'localhost','port': 27017}
+            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': '127.0.0.1','port': 27017}
         except:
             import api
             api.app.config['LIVESERVER_PORT'] = 5100
             api.app.config['TESTING'] = True
-            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': 'localhost','port': 27017}
+            api.app.config['MONGODB_SETTINGS'] = {'db': 'ddsm-integrate','host': '127.0.0.1','port': 27017}
 
         return api.app
 
