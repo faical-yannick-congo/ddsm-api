@@ -12,7 +12,9 @@ python:
 services: mongodb
 
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install: 
+  - "pip install -r requirements.txt"
+  - "pip install Lxml==3.4.0"
 
 before_script:
   - sleep 15 #mongo may not be responded directly. See http://docs.travis-ci.com/user/database-setup/#MongoDB

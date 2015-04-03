@@ -14,5 +14,4 @@ Werkzeug==0.9.6
 boto==2.14.0
 itsdangerous==0.24
 wsgiref==0.1.2
-Lxml==3.4.0
 Requests==2.4.1
