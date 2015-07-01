@@ -16,4 +16,6 @@ MONGODB_SETTINGS = {
     'port': 27017
 }
 
-
+STORMPATH_API_KEY_FILE = '~/.stormpath/apiKey.properties'
+STORMPATH_APPLICATION = 'sumatra-cloud'
+# STORMPATH_REDIRECT_URL = '/dashboard'
