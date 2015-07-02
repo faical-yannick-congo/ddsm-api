@@ -12,7 +12,7 @@ VERSION = '0.1-dev'
 
 MONGODB_SETTINGS = {
     'db': 'ddsm-production',
-    'host': '127.0.0.1',
+    'host': '52.26.128.245',
     'port': 27017
 }
 
