@@ -10,13 +10,9 @@ import json
 import difflib
 import hashlib
 import datetime
-import boto3
-import traceback
 # from difflib_data import *
 
 app = setup_app(__name__)
-
-s3 =  boto3.resource('s3')
 
 
 from flask.ext.stormpath import StormpathManager
@@ -62,22 +58,17 @@ def check_access(token):
 #     return [comp_buffer, "/tmp/"+str(current_user.id)+"-"+project.name+"-docker.tar"]
 
 def upload_handler(current_user, container, file_obj, kind):
-    dest_filename = str(current_user.id)+"-"+str(container.id)+"-%s.tar"%kind #kind is record| signature
+    dest_filename = os.path.join('/tmp/', str(current_user.id)+"-"+str(container.id)+"-%s.tar"%kind) #kind is record| signature
 
     print "About to write..."
-    # with open(dest_filename, 'wb') as fh:
-    #     # print "Content: %s" %file_obj.read()
-    #     # file_obj.seek(0)
-    #     fh.write(file_obj.read())
-
-    try:
-        s3.Bucket('ddsm-bucket').put_object(Key=str(current_user.id)+"-"+str(container.id)+"-%s.tar"%kind, Body=file_obj.read())
-    except:
-        print traceback.print_exc()
+    with open(dest_filename, 'wb') as fh:
+        # print "Content: %s" %file_obj.read()
+        # file_obj.seek(0)
+        fh.write(file_obj.read())
 
     if kind in ["docker", "rocket", "kubernetes", "unknown"]:
         container.image['location'] = dest_filename
-        container.image['size'] = file_obj.tell()
+        container.image['size'] = os.path.getsize(dest_filename)
     # if kind == "binary":
     #     record.image['binary'] = {'type':'executable', 'location':dest_filename, 'size':os.path.getsize(dest_filename)}
     # if kind == "source":
