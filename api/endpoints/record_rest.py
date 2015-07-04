@@ -28,7 +28,7 @@ def push_record(api_token, project_name):
             # user = UserModel.objects(email=user.email).first_or_404()
             project = ProjectModel.objects(name=project_name, owner=current_user).first_or_404()
             s3_client = boto3.client('s3')
-            print s3_client.get_bucket_location('ddsm-bucket')
+            print s3_client.get_bucket_location(Bucket='ddsm-bucket')
 
             # label = db.StringField(max_length=300)
             # created_at = db.DateTimeField(default=datetime.datetime.now())
