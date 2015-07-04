@@ -72,6 +72,7 @@ def upload_handler(current_user, container, file_obj, kind):
 
     try:
         s3_client = boto3.client('s3')
+        print s3_client.get_bucket_location('ddsm-bucket')
         s3_client.put_object(Bucket='ddsm-bucket', Key=str(current_user.id)+"-"+str(container.id)+"-%s.tar"%kind, Body=file_obj.read())
     except:
         print traceback.print_exc()
