@@ -158,7 +158,8 @@ def pull_project_all(api_token):
     if current_user is not None:
         if fk.request.method == 'GET':
             projects = ProjectModel.objects(owner=current_user)
-            summaries = [json.loads(p.summary_json()) for p in projects]
+            summaries = sorted([json.loads(p.summary_json()) for p in projects], key = lambda project: prject['created'])
+            # summaries = [json.loads(p.summary_json()) for p in projects]
             return fk.Response(json.dumps({'number':len(summaries), 'projects':summaries}), mimetype='application/json')
         else:
             return fk.make_response('Method not allowed.', status.HTTP_405_METHOD_NOT_ALLOWED)
