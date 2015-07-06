@@ -12,6 +12,7 @@ from ddsmdb.common.models import ContainerModel
 from ddsmdb.common.tools.basic_auth import requires_auth
 import traceback
 import mimetypes
+import datetime
 
 # from flask.ext.stormpath import user
 
@@ -39,6 +40,9 @@ def push_record(api_token, project_name):
                 record = RecordModel(project=project, container=ContainerModel.objects.with_id(project.history[-1]))
             else:
                 record = RecordModel(project=project)
+
+            record.created_at = datetime.datetime.now()
+
             record.label=str(record.id)
 
             if fk.request.data:
